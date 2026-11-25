@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
-    "build": "tsc -b && tsc -p server/tsconfig.json && vite build",
+    "build": "tsc -b && tsc -p server/tsconfig.json && tsc -p tsconfig.server.json && vite build",
     "preview": "vite preview",
     "test": "tsx scripts/test-db.ts",
     "dev:web": "vite",
@@ -22,10 +22,13 @@
     "simulate:phone": "tsx scripts/simulators/simulate-device.ts --profile galaxy-s23",
     "simulate:robot": "tsx scripts/simulators/simulate-device.ts --profile roboscape",
     "simulate:sensor": "tsx scripts/simulators/simulate-device.ts --profile sht40",
-    "simulate:classroom": "tsx scripts/simulators/simulate-device.ts --six"
+    "simulate:classroom": "tsx scripts/simulators/simulate-device.ts --six",
+    "start": "node build/server/index.js",
+    "start:render": "npm run db:migrate && npm start"
   },
   "dependencies": {
     "@fastify/cors": "^11.3.0",
+    "@fastify/static": "^10.1.12",
     "@fastify/websocket": "^11.3.3",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/dm-sans": "^5.3.0",
@@ -55,6 +58,6 @@
     "deepmerge-ts": "^8.0.0"
   },
   "engines": {
-    "node": ">=22.12"
+    "node": ">=22.12 <25"
   }
 }

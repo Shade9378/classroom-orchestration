@@ -1,3 +1,4 @@
+import {registerFrontend} from './frontend.js'
 import { DeviceProvisioning } from './deviceProvisioning.js'
 import { registerNetsBloxDevices,type NetsBloxDevices } from './netsbloxDevices.js'
 import Fastify from 'fastify'
@@ -21,8 +22,8 @@ const playlistSchema = z.object({ id: uuid, name, description: z.string().max(50
 const sessionParams = z.object({ sessionId: uuid })
 const work = z.object({ kind: z.enum(['activity','playlist']), id: uuid })
 
-export async function buildApp(db: PrismaClient, options: { timeoutMs?: number; now?: () => Date; presenceIntervalMs?: number; awayTimeoutMs?:number; netsbloxDevices?:NetsBloxDevices;deviceProvisioningPort?:number;enableLocalDeviceTesting?:boolean;teacherExitGraceMs?:number } = {}) {
-  const app = Fastify({ logger: { level: 'error' }, bodyLimit: 1024 * 1024 })
+export async function buildApp(db: PrismaClient, options: { timeoutMs?: number; now?: () => Date; presenceIntervalMs?: number; awayTimeoutMs?:number; netsbloxDevices?:NetsBloxDevices;deviceProvisioningPort?:number;enableLocalDeviceTesting?:boolean;teacherExitGraceMs?:number;frontendRoot?:string;trustProxy?:boolean } = {}) {
+  const app = Fastify({ logger: { level: 'error' }, bodyLimit: 1024 * 1024, trustProxy:options.trustProxy??false })
   const service = new ClassroomService(db, options.timeoutMs, options.now, options.awayTimeoutMs)
   await app.register(cors, { origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'https://editor.netsblox.org'], allowedHeaders: ['Content-Type', 'x-teacher-token', 'Authorization'] })
   await app.register(websocket, { options: { maxPayload: 4096 } })
@@ -365,5 +366,6 @@ export async function buildApp(db: PrismaClient, options: { timeoutMs?: number; 
     await changed(service.heartbeat(data.token))
     return 'online'
   })
+  if(options.frontendRoot)await registerFrontend(app,options.frontendRoot)
   return { app, service, deviceHub, netsbloxDevices, provisioning }
 }
