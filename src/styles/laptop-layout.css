@@ -1,0 +1,112 @@
+.app .live-title-row { justify-content:flex-start; }
+.live-title-row > div:first-child { min-width:0; max-width:220px; }
+.live-title-row h2 { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.live-header-controls { display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; }
+.live-header-controls .live-review-actions { margin:0; }
+
+.app.classroom-app :is(.activity-layout,.playlist-layout,.assignment-layout,.resource-layout) > .panel,
+.app.classroom-app .activity-side-column > .panel { min-height:0; max-height:calc(100dvh - 24px); overflow:hidden; }
+
+@media (min-width:1180px) and (min-height:600px) and (pointer:fine) {
+  .app.classroom-app { height:100dvh; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+  .app.classroom-app .topbar { flex-shrink:0; padding:0 16px; }
+  .app.classroom-app .topbar-content { gap:16px; }
+  .app.classroom-app .topbar-brand { width:110px; height:48px; padding:3px; }
+  .app.classroom-app .topbar-brand img { width:145px; transform:translate(8.5px,2.5px); }
+  .app.classroom-app .nav-button { height:54px; font-size:13px; gap:6px; }
+  .app.classroom-app .topnav { gap:20px; }
+  .app.classroom-app .topbar-account { gap:8px; font-size:12px; }
+  .app.classroom-app .teacher-account-name { max-width:110px; }
+  .app.classroom-app .session-bar { flex-shrink:0; margin:8px 12px 0; padding:7px 10px; gap:8px; border-radius:8px; font-size:12px; }
+  .app.classroom-app:has(.notification-count) .session-bar { padding-right:180px; }
+  .app.classroom-app .session-bar form { gap:6px; flex:0 1 330px; }
+  .app.classroom-app .session-bar input, .app.classroom-app .session-bar select { padding:6px 8px; height:32px; }
+  .app.classroom-app .session-controls { flex:1 1 400px; gap:8px; }
+  .app.classroom-app .join-code { font-size:17px; letter-spacing:2px; }
+  .app.classroom-app .primary-btn, .app.classroom-app .secondary-btn, .app.classroom-app .danger-btn, .app.classroom-app .success-btn { min-height:30px; padding:6px 9px; font-size:11px; }
+  .app.classroom-app .api-error { margin:6px 12px 0; padding:8px; flex-shrink:0; max-height:60px; overflow:auto; }
+  .app.classroom-app .classroom-content { flex:1; min-height:0; overflow:hidden; }
+  .app.classroom-app .page-shell { height:100%; min-height:0; max-width:none; padding:8px 12px; margin:0; }
+  .app.classroom-app .panel { min-width:0; }
+  .app.classroom-app .live-page { overflow:hidden; }
+  .app.classroom-app .live-grid { height:100%; min-height:0; grid-template-columns:minmax(0,1fr) 250px; grid-template-rows:minmax(0,1fr); grid-template-areas:'main overview'; gap:8px; }
+  .app.classroom-app .live-main { min-height:0; padding:10px; display:flex; flex-direction:column; overflow:hidden; }
+  .app.classroom-app .live-title-row { margin:0 0 8px; gap:8px; flex-shrink:0; }
+  .app.classroom-app .live-title-row h2 { font-size:18px; }
+  .app.classroom-app .live-title-row p { margin:2px 0 0; font-size:10px; }
+  .app.classroom-app .live-header-controls { gap:6px; }
+  .app.classroom-app .live-review-actions { gap:5px; }
+  .app.classroom-app .live-content-grid { flex:1; min-height:0; grid-template-columns:minmax(0,1fr) 330px; gap:8px; }
+  .app.classroom-app .netsblox-card { padding:8px; min-height:0; overflow:hidden; }
+  .app.classroom-app .netsblox-card h3 { font-size:12px; }
+  .app.classroom-app .group-editor-viewer { margin-top:6px; }
+  .app.classroom-app .group-editor-toolbar { gap:5px; margin-bottom:6px; }
+  .app.classroom-app .group-editor-toolbar .small { min-height:24px; padding:4px 6px; font-size:10px; }
+  .app.classroom-app .netsblox-card .group-editor-canvas { min-height:0; }
+  .app.classroom-app .group-editor-viewer iframe { min-width:0; }
+  .app.classroom-app .live-detail-stack { height:100%; min-height:0; contain:none; grid-template-columns:minmax(0,1fr); grid-template-rows:min(140px,24%) repeat(3,minmax(0,1fr)); gap:6px; }
+  .app.classroom-app .live-detail-row.two { gap:6px; }
+  .app.classroom-app .live-detail-stack .mini-card { height:100%; min-height:0; max-height:none; padding:8px; }
+  .app.classroom-app .mini-card h3 { margin-bottom:6px; font-size:10px; }
+  .app.classroom-app .mini-card .activity-live h3 { font-size:12px; }
+  .app.classroom-app .mini-card .empty-state.compact { min-height:0; padding:2px; gap:4px; }
+  .app.classroom-app .mini-card .empty-state-mark { width:18px; height:18px; font-size:12px; margin-bottom:0; }
+  .app.classroom-app .mini-card .empty-state strong { font-size:10px; }
+  .app.classroom-app .progress-card-header { margin-bottom:4px; }
+  .app.classroom-app .progress-row, .app.classroom-app .member-row, .app.classroom-app .device-row { padding:4px 0; font-size:10px; }
+  .app.classroom-app .recent-events-list { gap:5px; }
+  .app.classroom-app .event-row { font-size:9px; grid-template-columns:6px 54px minmax(0,1fr); gap:4px; }
+  .app.classroom-app .group-chat { gap:4px; }
+  .app.classroom-app .group-chat header h3 { margin:0; }
+  .app.classroom-app .group-chat input, .app.classroom-app .group-chat button { padding:4px 6px; font-size:10px; }
+  .app.classroom-app .overview-panel { min-height:0; overflow:hidden; }
+  .app.classroom-app .overview-panel { padding:8px; display:flex; flex-direction:column; }
+  .app.classroom-app .overview-top { gap:6px; flex-shrink:0; }
+  .app.classroom-app .overview-seg { gap:4px; flex-wrap:nowrap; width:100%; }
+  .app.classroom-app .overview-seg button { flex:1; padding:7px 3px; gap:4px; font-size:10px; }
+  .app.classroom-app .overview-seg svg { width:14px; height:14px; }
+  .app.classroom-app .overview-panel > :not(.overview-top) { min-height:0; overflow:auto; flex:1; margin-top:8px; }
+  .app.classroom-app .group-card-grid { display:flex; flex-direction:column; gap:6px; }
+  .app.classroom-app .group-card-grid > * { flex-shrink:0; }
+  .app.classroom-app .group-card { padding:8px; }
+  .app.classroom-app .overview-students { padding:8px; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+  .app.classroom-app .overview-students h2 { margin:0 0 6px; font-size:14px; }
+  .app.classroom-app .search-box { min-height:30px; padding:5px 8px; margin-bottom:6px; }
+  .app.classroom-app .overview-students .student-roster { min-height:0; overflow:auto; margin-top:0; }
+  .app.classroom-app .student-roster .student-table-row { min-height:32px; padding:6px; font-size:10px; gap:4px; }
+  .app.classroom-app .student-roster-without-actions .student-table-row { grid-template-columns:52px minmax(0,1fr) 46px; }
+  .app.classroom-app .live-no-selection { min-height:0; height:100%; }
+  .app.classroom-app .heading-actions { margin-bottom:8px; gap:6px; }
+  .app.classroom-app .subnav { margin-bottom:8px; padding-bottom:0; }
+  .app.classroom-app .subnav button { padding:7px 10px; font-size:12px; }
+  .app.classroom-app .activity-layout, .app.classroom-app .playlist-layout, .app.classroom-app .assignment-layout, .app.classroom-app .resource-layout { height:calc(100% - 42px); min-height:0; align-items:stretch; gap:10px; }
+  .app.classroom-app .activity-layout { grid-template-columns:200px minmax(0,1fr) 220px; }
+  .app.classroom-app .playlist-layout { grid-template-columns:200px minmax(0,1fr); }
+  .app.classroom-app .assignment-layout, .app.classroom-app .resource-layout { grid-template-columns:1.05fr 1fr 1fr; }
+  .app.classroom-app :is(.activity-layout,.playlist-layout,.assignment-layout,.resource-layout) > .panel { height:100%; min-height:0; max-height:100%; overflow:hidden; padding:12px; }
+  .app.classroom-app .activity-side-column { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:1fr 1fr; height:100%; min-height:0; gap:10px; }
+  .app.classroom-app .activity-side-column > .panel { min-height:0; overflow:hidden; padding:12px; }
+  .app.classroom-app .library-panel { display:flex; flex-direction:column; min-height:0; }
+  .app.classroom-app .library-list { flex:1; min-height:0; max-height:none; overflow:auto; }
+  .app.classroom-app .step-heading { margin-bottom:10px; }
+  .app.classroom-app .step-heading h2, .app.classroom-app .editor-title-row h2 { font-size:16px; }
+  .app.classroom-app .step-heading p { font-size:10px; }
+  .app.classroom-app .textarea-wrap textarea { min-height:70px; height:70px; }
+  .app.classroom-app .empty-panel-center { min-height:0; }
+  .app.classroom-app .group-choice-grid, .app.classroom-app .student-roster, .app.classroom-app .resource-device-list, .app.classroom-app .work-picker-list, .app.classroom-app .playlist-edit-list, .app.classroom-app .assigned-work-detail-list { max-height:230px; overflow:auto; }
+  .app.classroom-app .activity-test-results { max-height:80px; overflow:auto; }
+}
+
+@media (min-width:1180px) and (min-height:600px) and (pointer:fine) {
+  .app.classroom-app { --library-width:200px; }
+  .app.classroom-app .playlist-layout { grid-template-columns:var(--library-width) minmax(0,1fr); }
+  .app.classroom-app .live-grid { grid-template-rows:minmax(0,1fr); grid-template-areas:'main overview'; }
+  .app.classroom-app .overview-seg button { flex-direction:column; gap:3px; padding:6px 0; }
+  .app.classroom-app .overview-panel > :is(.overview-students,.overview-devices) { overflow:hidden; }
+  .app.classroom-app :is(.overview-students,.overview-devices) > :is(.student-roster,.device-overview-table) { flex:1; min-height:0; max-height:none; overflow:auto; }
+  .app.classroom-app :is(.assignment-layout,.resource-layout) > .panel { overflow:hidden; }
+  .app.classroom-app .work-assignment-column > .assignment-list,
+  .app.classroom-app .student-group-column > .student-roster,
+  .app.classroom-app .resource-device-list,
+  .app.classroom-app .assignment-box > .group-choice-grid { max-height:none; }
+}

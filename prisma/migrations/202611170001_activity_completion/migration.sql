@@ -1,0 +1,2 @@
+ALTER TYPE "CompletionMethod" ADD VALUE 'STUDENT';
+ALTER TYPE "ProgressStatus" ADD VALUE 'SUBMITTED';

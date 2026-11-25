@@ -1,0 +1,60 @@
+{
+  "name": "classroom-orchestration-checkpoint1",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm:dev:api\" \"npm:dev:web\"",
+    "build": "tsc -b && tsc -p server/tsconfig.json && vite build",
+    "preview": "vite preview",
+    "test": "tsx scripts/test-db.ts",
+    "dev:web": "vite",
+    "dev:api": "tsx watch server/index.ts",
+    "start:api": "tsx server/index.ts",
+    "db:start": "docker compose -p classroom-orchestration-cp2 up -d --wait db",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "test:api": "vitest run --config tests/vitest.config.ts",
+    "test:all": "npm run test:api && playwright test",
+    "test:e2e": "tsx scripts/test-db.ts test:browser",
+    "test:browser": "playwright test",
+    "seed:demo": "tsx scripts/seed-demo-library.ts",
+    "simulate:phone": "tsx scripts/simulators/simulate-device.ts --profile galaxy-s23",
+    "simulate:robot": "tsx scripts/simulators/simulate-device.ts --profile roboscape",
+    "simulate:sensor": "tsx scripts/simulators/simulate-device.ts --profile sht40",
+    "simulate:classroom": "tsx scripts/simulators/simulate-device.ts --six"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@fastify/websocket": "^11.3.3",
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@prisma/client": "^6.19.3",
+    "@vitejs/plugin-react": "latest",
+    "dotenv": "^18.0.5",
+    "fastify": "^5.12.5",
+    "lucide-react": "^1.52.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.4",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/ws": "^8.18.2",
+    "concurrently": "^10.0.5",
+    "prisma": "^6.19.3",
+    "tsx": "^4.23.15",
+    "vitest": "^5.0.3"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

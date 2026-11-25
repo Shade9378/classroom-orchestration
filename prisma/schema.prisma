@@ -1,0 +1,351 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+enum SessionStatus {
+  OPEN
+  CLOSED
+}
+enum Presence {
+  ONLINE
+  AWAY
+  OFFLINE
+}
+enum RecoveryPreference {
+  AUTO
+  ASK
+}
+enum CompletionMethod {
+  STUDENT
+  TEACHER
+  PROJECT
+}
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  COMPLETED
+}
+enum DeviceStatus {
+  ONLINE
+  OFFLINE
+  DEGRADED
+}
+// trimmed names is unique through a SQL expression index
+model Session {
+  id String @id @default(uuid()) @db.Uuid
+  name String
+  joinCode String @unique
+  teacherTokenHash String
+  status SessionStatus @default(OPEN)
+  createdAt DateTime @default(now())
+  participants Participant[]
+  groups Group[]
+  devices SessionDevice[]
+  events SystemEvent[]
+  warningDismissals WarningDismissal[]
+}
+// trimmed names is unique through a SQL expression index
+model Participant {
+  id String @id @default(uuid()) @db.Uuid
+  sessionId String @db.Uuid
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  name String
+  tokenHash String @unique
+  lastSeenAt DateTime @default(now())
+  status Presence @default(ONLINE)
+  member GroupMember?
+  @@unique([id, sessionId])
+  @@index([sessionId, status, lastSeenAt])
+}
+model Group {
+  id String @id @default(uuid()) @db.Uuid
+  sessionId String @db.Uuid
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  name String
+  status String @default("idle")
+  createdAt DateTime @default(now())
+  members GroupMember[]
+  assignments GroupAssignment[]
+  devices DeviceAssignment[]
+  alerts Alert[]
+  events SystemEvent[]
+  editors GroupEditor[]
+  messages GroupChatMessage[]
+  @@unique([id, sessionId])
+  @@unique([sessionId, name])
+}
+model GroupChatMessage {
+  id String @id @default(uuid()) @db.Uuid
+  groupId String @db.Uuid
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  senderId String
+  senderName String
+  text String
+  kind String @default("message")
+  context String?
+  createdAt DateTime @default(now())
+  resolvedAt DateTime?
+  @@index([groupId, createdAt])
+}
+model GroupMember {
+  groupId String @db.Uuid
+  participantId String @unique @db.Uuid
+  sessionId String @db.Uuid
+  group Group @relation(fields: [groupId, sessionId], references: [id, sessionId], onDelete: Cascade)
+  participant Participant @relation(fields: [participantId, sessionId], references: [id, sessionId], onDelete: Cascade)
+  joinedAt DateTime @default(now())
+  completionVotes GroupCompletionVote[]
+  @@id([groupId, participantId])
+  @@unique([participantId, sessionId])
+}
+// trimmed names is unique through a SQL expression index
+model Activity {
+  id String @id @default(uuid()) @db.Uuid
+  name String
+  description String @default("")
+  starterProjectRef String @default("")
+  starterProjectName String @default("")
+  recoveryPreference RecoveryPreference @default(AUTO)
+  completionMethod CompletionMethod @default(TEACHER)
+  testConfig Json?
+  estimatedMinutes Int @default(10)
+  category String @default("General")
+  createdAt DateTime @default(now())
+  requirements ActivityRequirement[]
+  playlistItems PlaylistItem[]
+  assignments GroupAssignment[]
+  progress GroupActivityProgress[]
+}
+model ActivityRequirement {
+  id String @id @default(uuid()) @db.Uuid
+  activityId String @db.Uuid
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  capability String
+  quantity Int
+}
+// trimmed names is unique through a SQL expression index
+model Playlist {
+  id String @id @default(uuid()) @db.Uuid
+  name String
+  description String @default("")
+  createdAt DateTime @default(now())
+  items PlaylistItem[]
+  assignments GroupAssignment[]
+}
+model PlaylistItem {
+  id String @id @default(uuid()) @db.Uuid
+  playlistId String @db.Uuid
+  playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  activityId String @db.Uuid
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  position Int
+  progress GroupActivityProgress[]
+  @@unique([playlistId, position])
+  @@unique([playlistId, activityId])
+}
+model GroupAssignment {
+  id String @id @default(uuid()) @db.Uuid
+  groupId String @db.Uuid
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  activityId String? @db.Uuid
+  activity Activity? @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  playlistId String? @db.Uuid
+  playlist Playlist? @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  status String @default("ACTIVE")
+  assignedAt DateTime @default(now())
+  progress GroupActivityProgress[]
+  @@unique([groupId, activityId])
+  @@unique([groupId, playlistId])
+}
+model GroupActivityProgress {
+  id String @id @default(uuid()) @db.Uuid
+  assignmentId String @db.Uuid
+  assignment GroupAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  activityId String @db.Uuid
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  playlistItemId String? @db.Uuid
+  playlistItem PlaylistItem? @relation(fields: [playlistItemId], references: [id], onDelete: Cascade)
+  status ProgressStatus @default(NOT_STARTED)
+  startedAt DateTime?
+  completedAt DateTime?
+  submissionId String? @db.Uuid
+  testResult Json?
+  votes GroupCompletionVote[]
+
+  @@unique([assignmentId, activityId])
+}
+model Device {
+  id String @id @default(uuid()) @db.Uuid
+  name String
+  type String
+  capabilities DeviceCapability[]
+  sessions SessionDevice[]
+}
+model DeviceCapability {
+  deviceId String @db.Uuid
+  device Device @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  capability String
+  @@id([deviceId, capability])
+}
+model SessionDevice {
+  id String @id @default(uuid()) @db.Uuid
+  sessionId String @db.Uuid
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  deviceId String @db.Uuid
+  device Device @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  status DeviceStatus @default(ONLINE)
+  joinedAt DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  batteryLevel Int?
+  latencyMs Int?
+  runtime DeviceRuntime?
+  assignments DeviceAssignment[]
+  alerts Alert[]
+  events SystemEvent[]
+  @@unique([sessionId, deviceId])
+  @@unique([id, sessionId])
+}
+model DeviceAssignment {
+  id String @id @default(uuid()) @db.Uuid
+  groupId String @db.Uuid
+  sessionDeviceId String @db.Uuid
+  sessionId String @db.Uuid
+  group Group @relation(fields: [groupId, sessionId], references: [id, sessionId], onDelete: Cascade)
+  sessionDevice SessionDevice @relation(fields: [sessionDeviceId, sessionId], references: [id, sessionId], onDelete: Cascade)
+  status String @default("ACTIVE")
+  assignedAt DateTime @default(now())
+}
+model Alert {
+  id String @id @default(uuid()) @db.Uuid
+  groupId String @db.Uuid
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sessionDeviceId String @db.Uuid
+  sessionDevice SessionDevice @relation(fields: [sessionDeviceId], references: [id], onDelete: Cascade)
+  type String
+  message String
+  status String @default("OPEN")
+  createdAt DateTime @default(now())
+}
+model SystemEvent {
+  id String @id @default(uuid()) @db.Uuid
+  sessionId String @db.Uuid
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  groupId String? @db.Uuid
+  group Group? @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sessionDeviceId String? @db.Uuid
+  sessionDevice SessionDevice? @relation(fields: [sessionDeviceId], references: [id], onDelete: SetNull)
+  type String
+  message String
+  createdAt DateTime @default(now())
+  @@index([sessionId, createdAt])
+}
+
+model TeacherAccount {
+  id String @id @default(uuid())
+  name String
+  nameKey String @unique
+  passwordHash String
+  salt String
+  logins TeacherLogin[]
+  warningDismissals WarningDismissal[]
+}
+model TeacherLogin {
+  tokenHash String @id
+  accountId String
+  account TeacherAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+}
+
+model GroupEditor {
+  groupId String @db.Uuid
+  workspaceKey String @default("")
+  revision String @default(uuid()) @db.Uuid
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  xml String
+  version Int @default(-1)
+  actions GroupEditorAction[]
+  @@id([groupId, workspaceKey])
+}
+model GroupEditorAction {
+  groupId String @db.Uuid
+  workspaceKey String @default("")
+  editor GroupEditor @relation(fields: [groupId, workspaceKey], references: [groupId, workspaceKey], onDelete: Cascade)
+  version Int
+  action Json
+  @@id([groupId, workspaceKey, version])
+}
+
+model DeviceRuntime {
+  sessionDeviceId String @id @db.Uuid
+  device SessionDevice @relation(fields:[sessionDeviceId], references:[id], onDelete:Cascade)
+  telemetryServiceName String?
+  serviceName     String?
+  remoteDeviceId  String?
+  mode String
+  profile String
+  model String
+  manufacturer String
+  state String @default("disconnected")
+  paired Boolean @default(false)
+  bluetoothId String?
+  services Json @default("[]")
+  intervalMs Int @default(1000)
+  latencyMs Int @default(40)
+  packetLoss Int @default(0)
+  battery Float @default(100)
+  telemetry Json @default("{}")
+  controls Json @default("{}")
+  sampledAt DateTime?
+  connectedAt DateTime?
+  tokenHash String?
+}
+
+model DeviceControl {
+  sourceKey String @id
+  sessionDeviceId String @db.Uuid
+  participantId String @db.Uuid
+  ownerTokenHash String
+  groupId String @db.Uuid
+  runId String @db.Uuid
+  leaseId String @db.Uuid
+  mode String
+  serviceName String
+  remoteDeviceId String
+  expiresAt DateTime
+  @@index([participantId])
+}
+
+model DeviceRun {
+  participantId String @db.Uuid
+  runId String @db.Uuid
+  finished Boolean @default(false)
+  updatedAt DateTime @updatedAt
+  @@id([participantId,runId])
+}
+
+model WarningDismissal {
+  id String @id @default(uuid()) @db.Uuid
+  accountId String
+  account TeacherAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  sessionId String @db.Uuid
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  fingerprint String
+  createdAt DateTime @default(now())
+  @@unique([accountId, sessionId, fingerprint])
+  @@index([sessionId])
+}
+
+model GroupCompletionVote {
+  progressId String @db.Uuid
+  participantId String @db.Uuid
+  groupId String @db.Uuid
+  createdAt DateTime @default(now())
+  progress GroupActivityProgress @relation(fields: [progressId], references: [id], onDelete: Cascade)
+  member GroupMember @relation(fields: [groupId, participantId], references: [groupId, participantId], onDelete: Cascade)
+  @@id([progressId, participantId])
+  @@index([groupId, participantId])
+}

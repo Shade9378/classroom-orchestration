@@ -1,0 +1,39 @@
+.student-app { padding:16px; font-family:Arial,sans-serif; color:#111; background:#fff; min-height:100vh; }
+.student-app h1 { font: bold 24px Arial,sans-serif; margin:0 0 16px; }
+.student-app form, .student-summary { display:flex; flex-wrap:wrap; align-items:end; gap:12px; margin-bottom:16px; }
+.student-app label { display:flex; flex-direction:column; gap:4px; }
+.student-app input { border:1px solid #777; padding:6px; }
+.student-app button { padding:6px 12px; border:1px solid #777; background:#eee; }
+.student-app [role=alert] { color:#a00; }
+.student-app iframe { display:block; width:100%; height:70vh; min-height:480px; border:1px solid #777; }
+
+.student-app { overflow-wrap:anywhere; }
+.student-device-table { max-width:100%; overflow-x:auto; margin-bottom:16px; }
+.student-device-table table { border-collapse:collapse; min-width:540px; width:100%; text-align:left; }
+.student-device-table th, .student-device-table td { padding:8px; border-bottom:1px solid #ddd; }
+.student-app label { min-width:0; max-width:100%; }
+@media (pointer:coarse), (max-width:1100px) {
+  .student-app input { font-size:16px; min-height:44px; min-width:0; }
+  .student-app button { min-height:44px; }
+}
+@media (max-width:600px) {
+  .student-app form label { flex:1 1 180px; }
+  .student-app input { width:100%; }
+  .student-summary { align-items:start; }
+}
+
+.student-editor-under-review { opacity: .55; }
+.student-review-status { font-weight: 600; }
+
+.student-help-form { margin-top:12px; }
+.student-help-form textarea { font:inherit; padding:8px; max-width:100%; }
+.student-help-form label { flex:1; }
+.student-app .group-chat { height:200px; max-width:700px; margin:16px 0; }
+
+.student-device-table { max-height:240px; overflow:auto; }
+.student-device-table thead { position:sticky; top:0; background:white; }
+.student-instructions { max-height:140px; overflow:auto; }
+.student-teammates, .student-assigned-work { max-height:90px; overflow:auto; }
+
+.student-app .group-chat form { flex-wrap:nowrap; gap:6px; margin:0; align-items:center; }
+@media (pointer:coarse), (max-width:700px) { .student-app .group-chat form button { min-height:44px; } }

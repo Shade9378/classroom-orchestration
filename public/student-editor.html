@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Classroom NetsBlox</title>
+<base href="https://editor.netsblox.org/">
+<script>
+if (new URLSearchParams(location.search).has('grading')) {
+  const policy = document.createElement('meta');
+  policy.httpEquiv = 'Content-Security-Policy';
+  policy.content = "default-src 'none'; script-src 'unsafe-inline' https://editor.netsblox.org " + location.origin
+    + "; connect-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; frame-src 'none'; form-action 'none'";
+  document.head.appendChild(policy);
+}
+for (const key of ['localStorage','sessionStorage']) {
+  const storage={getItem(k){return this[k]??null},setItem(k,v){this[k]=String(v)},removeItem(k){delete this[k]},clear(){for(const k of Object.keys(this))if(typeof this[k]!=='function')delete this[k]}};
+  Object.defineProperty(window,key,{value:storage});
+}
+</script>
+<script src="https://editor.netsblox.org/src/main.js"></script>
+<script src="https://editor.netsblox.org/dist/app.min.js?v=2.9.4"></script>
+</head><body style="margin:0"><canvas id="world" tabindex="1" style="position:absolute"></canvas>
+<script>const controls=document.createElement("script");controls.src=location.origin+"/student-device-control.js";controls.onload=()=>{const bridge=document.createElement("script");bridge.src=location.origin+"/student-editor-bridge.js";document.body.appendChild(bridge);};document.body.appendChild(controls);</script>
+</body></html>

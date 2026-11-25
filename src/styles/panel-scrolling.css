@@ -1,0 +1,234 @@
+.app { --panel-height:min(760px,calc(100dvh - 24px)); }
+.app .panel-scroll-body { flex:1 1 auto; min-height:0; min-width:0; overflow:auto; overscroll-behavior:contain; }
+.app .activities-page :is(.library-panel,.editor-panel,.playlist-editor) { display:flex; flex-direction:column; height:var(--panel-height); min-height:0; overflow:hidden; }
+.app .activities-page .library-panel > :not(.library-list), .app .activities-page .editor-title-row { flex-shrink:0; }
+.app .activities-page .library-list { flex:1; min-height:0; max-height:none; overflow:auto; }
+.app .activity-editor-fields { padding:0 4px 8px 0; }
+.app .activity-editor-fields .requirements-list { max-height:180px; overflow:auto; }
+.app .activity-side-column { min-height:0; height:var(--panel-height); display:grid; grid-template-rows:repeat(2,minmax(0,1fr)); }
+.app .activity-side-column > .panel { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+.app .activity-side-column > .panel > :is(h2,.section-title-row,.add-to-playlist-btn) { flex-shrink:0; }
+.app .playlist-preview > .preview-list { flex:1; min-height:0; overflow:auto; }
+.app .playlist-editor { gap:8px; }
+.app .playlist-editor > .editor-title-row { margin-bottom:0; }
+.app .playlist-metadata { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:12px; flex:0 0 auto; max-height:145px; overflow:auto; }
+.app .playlist-metadata > div { min-width:0; }
+.app .playlist-metadata .field-label { margin:0 0 4px; }
+.app .playlist-metadata .textarea-wrap { margin:0; }
+.app .playlist-metadata textarea { height:70px; min-height:70px; max-height:110px; }
+.app .playlist-editor > .playlist-items-title { flex-shrink:0; margin:0; gap:8px; }
+.app .playlist-items-title h2 { margin:0; font-size:16px; }
+.app .playlist-editor > .playlist-edit-list { display:flex; flex-direction:column; flex:0 1 auto; min-height:44px; max-height:none; overflow:auto; }
+.app .playlist-edit-list > .playlist-edit-row { flex:0 0 auto; }
+.app .playlist-editor > .add-activity-bar { flex-shrink:0; margin:0; }
+.app .playlist-editor > .empty-state { flex:1; min-height:0; }
+.app .selected-group-detail { display:flex; flex-direction:column; overflow:hidden; }
+.app .selected-group-detail > h3 { flex-shrink:0; }
+.app .selected-group-detail-body { flex:1; min-height:0; }
+.app .selected-group-detail-body.empty-group-detail { display:grid; place-items:center; }
+.app .overview-panel { display:flex; flex-direction:column; height:var(--panel-height); min-height:0; overflow:hidden; }
+.app .overview-top { flex-shrink:0; }
+.app .overview-panel > :is(.group-card-grid,.overview-students,.overview-devices,.overview-alerts) { flex:1; min-height:0; }
+.app .overview-panel > .group-card-grid { overflow:auto; align-content:start; }
+.app .overview-panel > :is(.overview-students,.overview-devices,.overview-alerts) { display:flex; flex-direction:column; overflow:hidden; }
+.app .overview-students > :is(h3,.search-box), .app .overview-devices > .device-overview-actions { flex-shrink:0; }
+.app .overview-students > .student-roster, .app .overview-devices > .device-overview-table, .app .overview-alerts > .alerts-list { flex:1; min-height:0; max-height:none; overflow:auto; }
+.app .group-card-header small { max-height:54px; overflow:auto; }
+.app .group-devices > div { max-height:72px; overflow:auto; }
+.app .device-table.header { position:sticky; top:0; z-index:1; background:var(--soft); }
+.app .device-dialog[open] { display:flex; flex-direction:column; height:min(760px,calc(100dvh - 32px)); max-height:calc(100dvh - 32px); overflow:hidden; }
+.app .device-dialog-header, .app .device-dialog > .api-error, .app .device-dialog-body > .device-window-actions { flex-shrink:0; }
+.app .device-dialog-body { display:flex; flex-direction:column; flex:1; min-height:0; overflow:hidden; }
+.app .device-dialog-body > form { display:flex; flex-direction:column; flex:1; min-height:0; overflow:hidden; }
+.app .device-connect-fields { padding-right:4px; }
+.app .device-connect-fields > label { margin-bottom:10px; }
+.app .device-dialog form > .device-window-actions { flex-shrink:0; }
+.app .device-workbench { flex:1; min-height:0; grid-template-rows:minmax(0,1fr); overflow:hidden; }
+.app .device-list { align-self:stretch; height:100%; min-height:0; overflow:auto; }
+.app .device-list button { flex-shrink:0; }
+.app .device-inspector { display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+.app .device-inspector > :not(.device-inspector-body) { flex-shrink:0; }
+.app .device-inspector > p { max-height:64px; overflow:auto; margin:6px 0; }
+.app .device-inspector-body { padding-right:4px; }
+.app .classroom-notifications { display:flex; flex-direction:column; overflow:hidden; }
+.app .notification-counts { position:static; flex-shrink:0; }
+.app .notification-feed { min-height:0; overflow:auto; pointer-events:auto; }
+.app .notification-list + .notification-list:not([hidden]) { margin-top:10px; }
+.app .api-error { overflow:hidden; align-items:center; }
+.app .api-error-message { flex:1; min-width:0; min-height:0; max-height:44px; overflow:auto; margin:0; }
+.app .api-error > button { flex-shrink:0; }
+.app .activity-review-dialog[open] { display:flex; flex-direction:column; height:min(450px,calc(100dvh - 32px)); overflow:hidden; }
+.app .activity-review-dialog form { display:flex; flex-direction:column; flex:1; min-height:0; }
+.app .activity-review-dialog :is(h2,.activity-review-dialog-actions) { flex-shrink:0; }
+.app .review-message-fields { display:grid; gap:12px; }
+.app .activity-review-dialog textarea { max-height:200px; }
+.app .group-chat [role=alert] { flex-shrink:0; max-height:40px; overflow:auto; }
+.app .activity-test-results { flex-shrink:0; max-height:none; overflow:hidden; }
+.app .activity-test-results > ol { max-height:100px; overflow:auto; margin:6px 0; }
+.app .netsblox-card > p[role=alert] { flex-shrink:0; max-height:60px; overflow:auto; }
+.app .simulator-controls pre { max-height:160px; overflow:auto; }
+.app .classroom-notification p { max-height:160px; overflow:auto; }
+.app .alert-card small { max-height:120px; overflow:auto; }
+.app .readiness-state { max-height:84px; overflow:auto; }
+.app .activity-settings-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; gap:24px; border-top:1px solid var(--line); margin-top:18px; padding-top:18px; }
+.app .hardware-time-settings { min-width:0; }
+.app .hardware-time-settings > .hardware-title { margin-top:0; }
+.app .activity-editor-actions { flex-wrap:wrap; justify-content:flex-end; }
+.app .playlist-placement-panel { gap:8px; justify-content:flex-start; }
+.app .playlist-placement-panel > h2 { margin:0; font-size:17px; }
+.app .playlist-placement-fields { display:grid; flex:0 0 auto; min-height:0; min-width:0; gap:7px; overflow:visible; }
+.app .playlist-placement-fields .field-label { margin:0; font-size:11px; }
+.app .playlist-placement-fields .text-input { height:34px; min-height:34px; width:100%; min-width:0; padding:5px 8px; font-size:12px; }
+.app .playlist-placement-fields .faux-input { display:block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; line-height:32px; padding:0 8px; }
+.app .playlist-placement-panel .add-to-playlist-btn { margin-top:0; }
+.app .activity-test-config { font-family:'DM Sans Variable',sans-serif; font-size:12px; font-weight:400; gap:10px; padding:12px; border:1px solid var(--line); border-radius:7px; background:var(--soft); }
+.app .activity-test-config label { display:grid; gap:6px; align-items:stretch; margin:0; font-family:inherit; font-size:12px; font-weight:600; }
+.app .activity-test-config :is(input,textarea) { width:100%; min-width:0; margin:0; padding:8px 10px; border:1px solid var(--line); border-radius:6px; background:var(--paper); font-family:inherit; font-size:13px; font-weight:400; line-height:1.5; }
+.app .activity-test-config small { font-family:inherit; font-size:11px; font-weight:400; line-height:1.5; }
+:is(.app,.student-app) { --scroll-thumb:#b6afa0; --scroll-hover:#b6a16a; }
+:is(.app,.student-app) * { scrollbar-width:thin; scrollbar-color:var(--scroll-thumb) transparent; }
+:is(.app,.student-app) *::-webkit-scrollbar { width:8px; height:8px; }
+:is(.app,.student-app) *::-webkit-scrollbar-track { background:transparent; }
+:is(.app,.student-app) *::-webkit-scrollbar-thumb { border:2px solid transparent; border-radius:999px; background:var(--scroll-thumb); background-clip:padding-box; }
+:is(.app,.student-app) *::-webkit-scrollbar-thumb:hover { background-color:var(--scroll-hover); }
+:is(.app,.student-app) *::-webkit-scrollbar-corner { background:transparent; }
+.app :is(.mini-card-scroll,.recent-events-list,.activity-description-scroll,.group-chat ul), .student-app .group-chat ul { scrollbar-width:thin; }
+.app :is(.mini-card-scroll,.recent-events-list,.activity-description-scroll,.group-chat ul)::-webkit-scrollbar, .student-app .group-chat ul::-webkit-scrollbar { display:block; }
+@media (max-width:1050px) and (min-width:701px) { .app .activity-side-column { height:320px; grid-template-rows:minmax(0,1fr); } }
+@media (max-width:700px) {
+  .app .playlist-metadata { grid-template-columns:minmax(0,1fr); max-height:170px; }
+  .app .activity-side-column { height:auto; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto; }
+  .app .activity-side-column > .panel { height:min(320px,calc(100dvh - 24px)); }
+  .app .activity-side-column > .playlist-placement-panel { height:auto; }
+  .app .device-workbench { grid-template-rows:minmax(54px,.25fr) minmax(0,1fr); }
+  .app .activity-settings-grid { grid-template-columns:minmax(0,1fr); gap:18px; }
+  .app .activity-test-config :is(input,textarea) { font-size:16px; }
+}
+@media (min-width:1180px) and (min-height:600px) and (pointer:fine) {
+  .app.classroom-app .activities-page :is(.library-panel,.editor-panel,.playlist-editor), .app.classroom-app .activity-side-column, .app.classroom-app .overview-panel { height:100%; }
+  .app.classroom-app .activities-page .activity-side-column > .panel, .app.classroom-app .activities-page .library-panel { overflow:hidden; }
+  .app.classroom-app .overview-panel > :is(.overview-students,.overview-devices,.overview-alerts) { overflow:hidden; }
+  .app.classroom-app .resource-column > .selected-group-detail { overflow:hidden; }
+  .app.classroom-app .playlist-editor > .add-activity-bar { padding:6px 8px; }
+  .app.classroom-app .add-activity-bar select { height:30px; min-height:30px; padding:4px 8px; }
+}
+@media (pointer:coarse), (max-width:1100px) {
+  .app .playlist-placement-fields .text-input { height:44px; min-height:44px; font-size:16px; }
+  .app .playlist-placement-fields .faux-input { line-height:42px; }
+}
+@media (min-width:1051px) { .app .activity-side-column:has(> .playlist-placement-panel) { grid-template-rows:auto minmax(0,1fr); } }
+.app .classroom-notifications { gap:6px; }
+.app .notification-counts { gap:6px; }
+.app .notification-count { min-height:32px; padding:5px 8px; gap:5px; border-radius:7px; box-shadow:0 2px 8px #111c2410; font-size:12px; }
+.app .notification-count strong { min-width:12px; }
+.app .notification-count svg { width:15px; height:15px; }
+.app .notification-count.error { color:#b91c1c; background:#fff1f1; border-color:#efb1ac; }
+.app .notification-count.warning { color:#9a5418; background:#fff7ed; border-color:#ecd1ad; }
+.app .notification-list:not([hidden]) { gap:6px; }
+.app .classroom-notification { display:flex; flex-direction:column; gap:5px; padding:10px; border-radius:8px; border:1px solid #e2ddd3; border-left:3px solid #d69a48; background:#fffdfa; color:var(--ink); box-shadow:0 3px 12px #111c2410; }
+.app .classroom-notification.error { border-color:#edd6d3; border-left-color:#c94c42; background:#fffdfd; color:var(--ink); }
+.app .classroom-notification > div { width:100%; }
+.app .notification-heading { display:flex; align-items:flex-start; gap:6px; }
+.app .notification-heading > svg { flex-shrink:0; margin-top:1px; color:#b17b29; }
+.app .error .notification-heading > svg { color:#be4338; }
+.app .notification-heading > strong { flex:1; min-width:0; font-size:12px; font-weight:650; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.app .notification-new { flex-shrink:0; margin:0; padding:1px 4px; font-size:9px; font-weight:600; border:0; border-radius:4px; background:var(--accent-soft); color:#8a661b; }
+.app .classroom-notification .notification-detail { margin:0; color:var(--muted); font-size:11px; line-height:1.45; max-height:none; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.app .classroom-notification .notification-detail.expanded { display:block; max-height:120px; overflow:auto; }
+.app .notification-actions { display:flex; align-items:center; flex-wrap:wrap; gap:5px; margin-top:2px; }
+.app .classroom-notifications .notification-actions button { min-height:24px; padding:3px 6px; border:1px solid transparent; border-radius:4px; background:transparent; color:var(--muted); font:inherit; font-size:10px; font-weight:500; text-decoration:none; }
+.app .classroom-notifications .notification-actions button:hover { background:var(--soft); color:var(--ink); }
+.app .classroom-notifications .notification-actions .notification-approve { background:var(--accent-soft); border-color:#e4d3a0; color:#71551d; font-weight:650; }
+.app .activity-test-config .file-picker { display:inline-flex; flex-direction:row; align-items:center; gap:6px; margin:0; width:auto; font-size:11px; font-weight:600; }
+.app .test-case-file-actions { display:flex; justify-content:flex-start; }
+
+.app.classroom-app { --library-width:280px; --library-tools-width:240px; }
+.app .activities-page .editor-title-row { align-items:center; gap:12px; margin-bottom:0; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.app .activity-editor-fields { padding-top:12px; }
+.app .activity-editor-fields > .field-label:first-child { margin-top:0; }
+.app .playlist-editor { gap:12px; }
+.app .playlist-editor-actions { flex-wrap:wrap; justify-content:flex-end; }
+.app .playlist-metadata { grid-template-columns:minmax(0,1fr); gap:14px; max-height:none; padding-top:0; overflow:visible; }
+.app .activities-page .textarea-wrap textarea { height:80px; min-height:80px; max-height:100px; }
+.app .playlist-resource-panel { display:flex; flex-direction:column; height:var(--panel-height); min-height:0; overflow:hidden; }
+.app .playlist-resource-panel > h2 { display:flex; align-items:center; gap:7px; flex-shrink:0; margin:0; font-size:17px; }
+.app .playlist-resource-panel > p { flex-shrink:0; margin:10px 0; }
+.app .playlist-resource-panel .resource-cards { display:flex; flex-direction:column; flex:1; min-height:0; overflow:auto; gap:8px; }
+.app .playlist-resource-panel .resource-card { flex-shrink:0; }
+.app .editor-panel { container-type:inline-size; }
+.app .live-header-controls { margin-left:auto; }
+@container (max-width:650px) { .app .activity-settings-grid { grid-template-columns:minmax(0,1fr); } }
+@media (min-width:1051px) {
+  .app.classroom-app :is(.activity-layout,.playlist-layout) { grid-template-columns:var(--library-width) minmax(0,1fr) var(--library-tools-width); }
+}
+@media (min-width:1600px) { .app.classroom-app { --library-width:320px; --library-tools-width:260px; } }
+@media (min-width:701px) and (max-width:1050px) {
+  .app.classroom-app { --library-width:260px; }
+  .app.classroom-app :is(.activity-layout,.playlist-layout) { grid-template-columns:var(--library-width) minmax(0,1fr); }
+  .app .playlist-resource-panel { grid-column:1 / -1; height:320px; }
+}
+@media (max-width:700px) { .app .playlist-resource-panel { height:320px; } }
+@media (min-width:1180px) and (min-height:600px) and (pointer:fine) {
+  .app.classroom-app .playlist-resource-panel { height:100%; }
+}
+
+.app .playlist-resource-panel .resource-cards > .empty-state { flex:1; min-height:0; }
+
+.app .alert-filters { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; flex-shrink:0; padding-bottom:8px; border-bottom:1px solid var(--line); }
+.app .alert-filter { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; padding:6px 3px; border:1px solid transparent; border-radius:6px; background:transparent; color:var(--muted); font-size:10px; }
+.app .alert-filter-count { font-size:10px; font-weight:650; }
+.app .alert-filter[aria-selected=true] { border-color:#dac98d; background:var(--accent-soft); color:#70571f; }
+.app .alert-filter.notice[aria-selected=true] { border-color:#c9d1d5; background:#f0f3f4; color:#4d606a; }
+.app .alert-filter.warning[aria-selected=true] { border-color:#edc79b; background:#fff5e8; color:#945314; }
+.app .alert-filter.error[aria-selected=true] { border-color:#edb9b5; background:#fff0ef; color:#a73a31; }
+.app .alert-filter-results { display:flex; flex-direction:column; flex:1; min-height:0; overflow:hidden; }
+.app .alert-filter-results > .alerts-list { flex:1; min-height:0; overflow:auto; margin-top:8px; }
+.app .alert-filter-results > .empty-state { flex:1; min-height:0; }
+.app .alert-card.notice { border-color:#d5dee2; background:#f6f8f9; color:#4d606a; }
+.app .notification-count.notice { color:#4d606a; background:#f3f6f7; border-color:#c9d1d5; }
+.app .classroom-notification.notice { border-color:#dbe1e5; border-left-color:#82949d; background:#fdfefe; }
+.app .notice .notification-heading > svg { color:#667e8b; }
+@media (min-width:1180px) and (min-height:600px) and (pointer:fine) {
+  .app.classroom-app:has(.notification-count.notice) .session-bar { padding-right:210px; }
+}
+
+.app .group-page :is(.group-choice-grid,.readiness-grid) { align-content:start; align-items:start; grid-auto-rows:max-content; }
+
+.app .group-page .group-choice-grid { grid-template-columns:repeat(auto-fill,min(150px,100%)); }
+.app .group-page .group-choice { min-width:0; width:100%; }
+.app .group-page .group-choice > span { flex:1; min-width:0; }
+.app .group-page .group-choice b { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+.app .group-page .preview-column > .preview-groups { flex:1 1 auto; min-height:0; max-height:none; overflow:auto; }
+
+.app.classroom-app .topbar-content { width:100%; max-width:none; margin:0; justify-content:space-between; }
+.app.classroom-app .review-reject { background:#b52c26; color:#fff; border-color:#b52c26; }
+.app.classroom-app .review-reject:hover { background:#92211d; border-color:#92211d; }
+.app .classroom-notifications .notification-actions .notification-reject { color:#fff; background:#b52c26; border-color:#b52c26; }
+.app .classroom-notifications .notification-actions .notification-reject:hover { background:#92211d; border-color:#92211d; }
+
+.app .alert-filter-label { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; }
+.app .alert-filter.notice, .app .alert-filter.notice[aria-selected=true] { color:#2563a6; }
+.app .alert-filter.warning, .app .alert-filter.warning[aria-selected=true] { color:#9a5418; }
+.app .alert-filter.error, .app .alert-filter.error[aria-selected=true] { color:#b52c26; }
+.app .alert-filter.notice[aria-selected=true] { background:#eff6ff; border-color:#a9c9eb; }
+.app .alert-card.notice { color:#2563a6; background:#eff6ff; border-color:#bbd5ed; }
+.app .notification-count.notice { color:#2563a6; background:#eff6ff; border-color:#a9c9eb; }
+.app .classroom-notification.notice { border-color:#c8dcef; border-left-color:#2563a6; }
+.app .notice .notification-heading > svg { color:#2563a6; }
+.app .completion-help { display:block; color:var(--muted); font-size:11px; line-height:1.5; margin:6px 0; }
+
+
+.app .overview-panel .device-overview-table .device-table { min-width:0; grid-template-columns:minmax(0,1.15fr) minmax(0,1.1fr) minmax(0,.9fr) minmax(0,1fr); gap:5px; padding:9px 5px; font-size:10px; }
+.app .overview-panel .device-table > span { min-width:0; max-width:100%; overflow-wrap:anywhere; }
+.app .overview-panel .device-table > span:last-child { justify-self:stretch; text-align:center; }
+.app .overview-panel .device-table .group-tag { display:inline-block; max-width:100%; min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; vertical-align:middle; padding:4px; }
+.app .overview-panel .overview-device-status { flex-wrap:wrap; gap:3px; }
+.app .assignment-layout :is(.student-group-column,.work-assignment-column) > .assignment-box { flex:0 0 50%; height:50%; }
+.app :is(.student-membership-actions,.work-assignment-actions) { display:flex; flex-direction:row; align-items:stretch; flex-wrap:wrap; gap:8px; }
+.app :is(.student-membership-actions,.work-assignment-actions) .primary-btn { flex:1; min-width:0; }
+.app :is(.student-membership-actions,.work-assignment-actions) .secondary-btn { flex-shrink:0; }
+.app .session-action-buttons { display:inline-grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.app .session-action-buttons > button { width:100%; white-space:nowrap; }
+
+.app .playlist-preview .preview-row { grid-template-columns:20px minmax(0,1fr); }

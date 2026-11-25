@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: classroom
+      POSTGRES_PASSWORD: classroom_local
+      POSTGRES_DB: classroom
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - classroom_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U classroom -d classroom"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+volumes:
+  classroom_data:
