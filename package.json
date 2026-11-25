@@ -23,8 +23,7 @@
     "simulate:robot": "tsx scripts/simulators/simulate-device.ts --profile roboscape",
     "simulate:sensor": "tsx scripts/simulators/simulate-device.ts --profile sht40",
     "simulate:classroom": "tsx scripts/simulators/simulate-device.ts --six",
-    "start": "node build/server/index.js",
-    "start:render": "npm run db:migrate && npm start"
+    "start": "node build/server/index.js"
   },
   "dependencies": {
     "@fastify/cors": "^11.3.0",

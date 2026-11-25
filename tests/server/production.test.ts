@@ -43,7 +43,7 @@ test('one production server serves both interfaces and assets without exposing s
   expect((await live.app.inject('/rpc/Classroom')).json().name).toBe('Classroom')
 })
 test('HTTPS proxy login sets a secure cookie and the same host supports teacher WebSockets',async()=>{
-  const headers={host:'internal:10000',origin:'https://classroom.onrender.com','x-forwarded-host':'classroom.onrender.com','x-forwarded-proto':'https'}
+  const headers={host:'internal:10000',origin:'https://classroom.example.com','x-forwarded-host':'classroom.example.com','x-forwarded-proto':'https'}
   const register=await live.app.inject({method:'POST',url:'/api/teacher/register',headers,payload:{name:'Hosted teacher '+randomUUID(),password:'Hosted test password'}})
   expect(register.statusCode,register.body).toBe(200)
   const cookie=String(register.headers['set-cookie'])
