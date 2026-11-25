@@ -38,16 +38,4 @@ npm run dev
 
 ### Student Program
 
-No separate installation or server. With the system running, open http://localhost:5173/student, enter the teacher's join code and your name, then click **Join class**. The NetsBlox editor opens after joining; internet access is required.
-
-For students on other computers, run the API and frontend in separate terminals instead of `npm run dev`:
-
-```bash
-npm run dev:api
-```
-
-```bash
-npm run dev:web -- --host 0.0.0.0
-```
-
-On the same network, students open `http://<teacher-computer-IP>:5173/student`. Allow port 5173 through the firewall. In WSL, also forward that port or use mirrored networking.
+With the system running, open [http://localhost:5173/student](http://localhost:5173/student), internet access is required.
