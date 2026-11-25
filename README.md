@@ -1,4 +1,5 @@
 ## A Centralized System for Classroom Planning, Orchestration, and Resource Management for Physical Computing Courses
+A centralized classroom management system built on top of NetsBlox to support activity planning, real-time classroom orchestration, physical resource management, and infrastructure failure recovery in IoT and robotics education.
 
 ## System Interface
 
