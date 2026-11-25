@@ -1,4 +1,20 @@
-## System
+## A Centralized System for Classroom Planning, Orchestration, and Resource Management for Physical Computing Courses
+
+## System Interface
+
+![Classroom management and monitoring interface](assets/readme/classroom-management-monitoring.png)
+
+![Activities and playlist planning](assets/readme/activities-playlist-planning.png)
+
+![Activities and resource assignment interface](assets/readme/activities-resource-assignment.png)
+
+## Student Program Interface
+
+![Student program interface](assets/readme/student-program.png)
+
+## Setup
+
+### System
 
 Install Git, Node.js 24, and Docker with Docker Compose. Start Docker, then run in Bash (Windows: WSL):
 
@@ -20,13 +36,7 @@ npm run db:start
 npm run dev
 ```
 
-![Classroom management and monitoring interface](assets/readme/classroom-management-monitoring.png)
-
-![Activities and playlist planning](assets/readme/activities-playlist-planning.png)
-
-![Activities and resource assignment interface](assets/readme/activities-resource-assignment.png)
-
-## Student Program
+### Student Program
 
 No separate installation or server. With the system running, open http://localhost:5173/student, enter the teacher's join code and your name, then click **Join class**. The NetsBlox editor opens after joining; internet access is required.
 
@@ -41,5 +51,3 @@ npm run dev:web -- --host 0.0.0.0
 ```
 
 On the same network, students open `http://<teacher-computer-IP>:5173/student`. Allow port 5173 through the firewall. In WSL, also forward that port or use mirrored networking.
-
-![Student program interface](assets/readme/student-program.png)
