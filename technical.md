@@ -38,9 +38,5 @@ The [Prisma schema](prisma/schema.prisma) is the authoritative definition of cur
 
 - NetsBlox editing and device services require internet access and an available service host. Device status reflects service responses, not a direct physical connection check.
 - Devices need compatible firmware, an adapter, or PhoneIoT. The dashboard does not provide general Bluetooth discovery or firmware installation.
-- PhoneIoT passwords are held in backend memory and must be entered again after a backend restart. The current phone command interface supports selected sensor RPCs.
 - Telemetry depends on what the integration exposes. Battery shows unavailable when no reading is supplied; not every robot or phone provides it.
-- Control locks coordinate commands routed through this application. They do not block clients that contact NetsBlox services independently.
-- Automatic tests check configured NetsBlox reporter inputs and expected outputs; arbitrary physical tasks need teacher review or additional task-specific checks.
 - Opening the student program from another computer requires network access to the system. `localhost` refers to that student's own computer.
-- Local simulator discovery is disabled by default and is unavailable in production. Real hardware should be verified with its supported service before classroom use.
