@@ -70,3 +70,7 @@ Re-enter the password after restarting the backend; it is not saved in the datab
 For dashboard sensor readings, expose `getReadings(id)` returning `[[name, value, unit], ...]`, for example `[["temperature", 22, "deg C"], ["humidity", 45, "% RH"]]`. Optionally expose `getBatteryLevel(id)` returning a percentage. Device RPCs must take `id` as their first argument. A bare sensor without compatible firmware or an adapter will not appear automatically.
 
 For a custom NetsBlox host, set `NETSBLOX_SERVICES_URL` in `.env` and restart the backend. After connecting, use **Group Assignments => Resource Allocation** to assign devices to groups.
+
+## Acknowledgements
+
+This project integrates and customizes the [NetsBlox editor](https://github.com/NetsBlox/Snap--Build-Your-Own-Blocks) and uses its RoboScape, IoTScape, and PhoneIoT services, developed by the NetsBlox team at Vanderbilt University, led by [Akos Ledeczi](https://computing.vanderbilt.edu/person/akos-ledeczi/).
